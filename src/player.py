@@ -2,11 +2,11 @@ import pygame
 from math import ceil
 
 class Player:
-    speed = 4
-    jumpPower = -7
+    speed = 3
+    jumpPower = -5
 
     def __init__(self, winSize):
-        self.rect = pygame.Rect((winSize[0] / 2) - 10, 50, 20, 20)
+        self.rect = pygame.Rect((winSize[0] / 2) - 10, 50, 10, 10)
         
         self.vel = 0
         self.canJump = True

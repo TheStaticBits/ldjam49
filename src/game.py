@@ -29,8 +29,10 @@ class Game:
     
     def render(self):
         if self.scene == "play":
+            self.objects.render_background(self.window.screen)
             self.player.render(self.window.screen)
-            self.objects.render(self.window.screen)
+            self.objects.render_platforms(self.window.screen)
+            self.objects.render_lava(self.window.screen)
 
     def run(self):
         while not self.input.closeWindow:

@@ -10,7 +10,7 @@ class Animation:
         for count in range(int(img.get_width() / indivWidth)):
             frameImg = pygame.Surface((indivWidth, img.get_width()))
             frameImg.blit(img, (-count * indivWidth, 0))
-            print((-count * img.get_width()))
+            frameImg.set_colorkey((0, 0, 0))
             self.images.append(frameImg)
         
         self.gap = gap

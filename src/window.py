@@ -3,7 +3,7 @@ import pygame
 class Window:
     def __init__(self, size):
         self.window = pygame.display.set_mode(size)
-        self.screen = pygame.Surface((size[0] - 40, size[1] - 40))
+        self.screen = pygame.Surface(((size[0] - 40) / 2, (size[1] - 40) / 2))
 
         self.size = (self.screen.get_width(), self.screen.get_height())
 
@@ -12,7 +12,7 @@ class Window:
         self.clock = pygame.time.Clock()
 
     def update(self):
-        self.window.blit(self.screen, (20, 20))
+        self.window.blit(pygame.transform.scale(self.screen, (self.size[0] * 2, self.size[1] * 2)), (20, 20))
         
         pygame.display.flip()
         self.clock.tick(60)
