@@ -5,22 +5,52 @@ class Player:
     jumpPower = -10
 
     def __init__(self, winSize):
-        self.pos = [winSize[0] / 2, winSize[1] / 2]
+        self.rect = pygame.Rect(winSize[0] / 2, winSize[1] / 2, 20, 20)
         
         self.vel = 0
+        self.canJump = True
     
-    def update(self, inputs):
-        self.pos[0] -= inputs["left"] * self.speed
-        self.pos[0] += inputs["right"] * self.speed
+    def update(self, inputs, check_all):
+        directions = []
 
-        self.vel += 0.5 # Gravity
+        # Left and right
+        if inputs["left"]:
+            self.rect.x -= self.speed
+            directions.append("left")
+        if inputs["right"]:
+            self.rect.x += self.speed
+            directions.append("right")
+
+        if directions != []: # if the player has moved
+            result = check_all(self.rect)
+            if result != False:
+                if "left" in directions:
+                    self.rect.left = result.right
+                elif "right" in directions:
+                    self.rect.right = result.left
+
+        # Gravity
+        self.vel += 0.5 
         
         # Jump
-        # Needs another collision test
-        if inputs["up"]:
+        if inputs["up"] and self.canJump:
             self.vel = self.jumpPower
+            self.canJump = False
+        
+        self.rect.y += self.vel
 
-        self.pos[1] += self.vel
+        if self.vel != 0:
+            result = check_all(self.rect)
+            if result != False:
+
+                if self.vel < 0: # If rising
+                    self.rect.top = result.bottom
+                    
+                else: # If falling
+                    self.rect.bottom = result.top
+                    self.canJump = True
+                
+                self.vel = 0
     
     def render(self, window):
-        pygame.draw.rect(window, (255, 255, 255), (self.pos[0], self.pos[1], 20, 20))
+        pygame.draw.rect(window, (255, 0, 0), self.rect)

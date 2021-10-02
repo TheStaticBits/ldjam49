@@ -5,28 +5,28 @@ class Input:
         self.closeWindow = False
 
         self.keys = {
-            "left": 0,
-            "right": 0,
-            "up": 0
+            "left": False,
+            "right": False,
+            "up": False
         }
     
     def update(self):
-        self.keys["up"] = 0 # Cannot hold the up key
+        self.keys["up"] = False # You cannot hold the up key
         for event in pygame.event.get():
             # Handling inputs
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_a:
-                    self.keys["left"] = 1
+                    self.keys["left"] = True
                 elif event.key == pygame.K_RIGHT or event.key == pygame.K_d:
-                    self.keys["right"] = 1
+                    self.keys["right"] = True
                 elif event.key == pygame.K_UP or event.key == pygame.K_w:
-                    self.keys["up"] = 1
+                    self.keys["up"] = True
             
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_a:
-                    self.keys["left"] = 0
+                    self.keys["left"] = False
                 elif event.key == pygame.K_RIGHT or event.key == pygame.K_d:
-                    self.keys["right"] = 0
+                    self.keys["right"] = False
 
             # Handling the X button
             elif event.type == pygame.QUIT:
