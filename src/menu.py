@@ -1,4 +1,5 @@
 import pygame
+from src.modifySaves import *
 
 class Menu:
     def __init__(self, windowSize):
@@ -38,11 +39,16 @@ class Menu:
         self.arrow2.x = self.difficultyPos[0] + 95
         
         self.previousScore = "---"
-        self.bestScore = "---"
+        self.bestScore = get_highscores()[self.difficulty - 1]
         self.prevBestScrFont = pygame.font.Font("font/monogram.ttf", 50) # For both the previous score and the best score
     
     def updateScore(self, score):
         self.previousScore = score
+
+        currentScore = get_highscores()[self.difficulty - 1]
+        if isinstance(currentScore, str) or score > currentScore:
+            modify_highscore(self.difficulty, score)
+            self.bestScore = get_highscores()[self.difficulty - 1]
     
     def update(self, mousePos, mouseDown):
         if mouseDown:
@@ -60,6 +66,8 @@ class Menu:
 
             elif self.difficulty > 6:
                 self.difficulty = 1
+
+            self.bestScore = get_highscores()[self.difficulty - 1]
 
     def calcCenter(self, window, font, text):
         render = font.render(text, False, (255, 255, 255))
