@@ -5,15 +5,18 @@ class Window:
         self.window = pygame.display.set_mode(size)
         self.screen = pygame.Surface(((size[0] - 100) / 2, (size[1] - 100) / 2))
 
+        # Size of smaller window
         self.size = (self.screen.get_width(), self.screen.get_height())
-        self.winSize = (self.window.get_width(), self.window.get_height())
+        # Size of entire window
+        self.winSize = size
 
         pygame.display.set_caption("Ludum Dare 49")
 
         self.clock = pygame.time.Clock()
 
-    def update(self):
-        self.window.blit(pygame.transform.scale(self.screen, (self.size[0] * 2, self.size[1] * 2)), (50, 75))
+    def update(self, drawSmaller=True):
+        if drawSmaller:
+            self.window.blit(pygame.transform.scale(self.screen, (self.size[0] * 2, self.size[1] * 2)), (50, 75))
         
         pygame.display.flip()
         self.clock.tick(60)

@@ -18,6 +18,9 @@ class Platform:
 
         self.rect = pygame.Rect(pos[0], pos[1], size[0], size[1])
         
+        self.reset()
+    
+    def reset(self):
         self.collapsed = False
         self.collapsing = False
         self.collapsingStage = 0

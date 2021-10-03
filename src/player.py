@@ -11,6 +11,9 @@ class Player:
         
         self.vel = 0
         self.canJump = True
+
+    def reset(self, winSize):
+        self.rect = pygame.Rect((winSize[0] / 2) - self.img.get_width(), 50, self.img.get_width(), self.img.get_height())
     
     def update(self, inputs, windowSize, check_all):
         directions = []

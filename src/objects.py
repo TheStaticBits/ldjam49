@@ -19,7 +19,15 @@ class Objects:
         self.lavaAnim = Animation("res/lava.png", 25, 40)
 
         # Background image
-        self.bgIMG = pygame.image.load("res/background.png").convert()
+        img = pygame.image.load("res/background.png").convert()
+        self.background = pygame.Surface(windowSize)
+        for y in range(int(windowSize[1] / 25)):
+            for x in range(int(windowSize[0] / 25)):
+                self.background.blit(img, (x * 25, y * 25))
+    
+    def reset(self):
+        for platform in self.platforms:
+            platform.reset()
     
     def check_all(self, rect):
         for platform in self.platforms:
@@ -40,10 +48,7 @@ class Objects:
         self.lavaAnim.flip()
     
     def render_background(self, window):
-        # Background
-        for y in range(int(window.get_height() / 25)):
-            for x in range(int(window.get_width() / 25)):
-                window.blit(self.bgIMG, (x * 25, y * 25))
+        window.blit(self.background, (0, 0))
 
     def render_platforms(self, window):
         # Platforms

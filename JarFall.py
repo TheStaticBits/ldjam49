@@ -1,4 +1,4 @@
-# Run this file to play
+# ----- Run this file to play ----- #
 
 from src.game import Game
 

@@ -1,7 +1,13 @@
+# I realized that this wasn't used that much :(
+# It was only used for the lava, which only has two frames anyway
+# I guess I could use it for the player...?
+
 import pygame
 from math import floor
 
 class Animation:
+    # indivWidth: width of each frame in the spritesheet
+    # gap: delay between each frame
     def __init__(self, filePath, indivWidth, gap):
         img = pygame.image.load(filePath).convert_alpha()
 
@@ -16,6 +22,7 @@ class Animation:
         self.gap = gap
         self.frame = 0
 
+    # Moves to the next frame, returns True if the animation looped back to the start
     def flip(self):
         # Incrementing frame number
         self.frame += 1
@@ -23,12 +30,13 @@ class Animation:
         # Resetting animation if it ended
         if self.frame / self.gap == len(self.images):
             self.frame = 0
+
             return True
-        
+            
         return False
         # Return statements are for if the animation is only supposed to be played once
     
-    # Renders and flips to the next image
+    # Renders the current frame
     def get_image(self):
         return self.images[floor(self.frame / self.gap)]
     
