@@ -36,4 +36,4 @@ Every second is worth 10 points. The highest scores of each difficulty are autom
 - Run JamFall.exe
 - Enjoy! (Hopefully)
 
-### GAME ON LUDUM DARE'S WEBSITE: https://ldjam.com/events/ludum-dare/49/jam-fall
+# GAME ON LUDUM DARE'S WEBSITE: https://ldjam.com/events/ludum-dare/49/jam-fall
