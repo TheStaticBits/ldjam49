@@ -67,13 +67,9 @@ class Objects:
             if not platform.collapsing and not platform.collapsed:
                 platform.start_collapse()
         
-        fallen = []
-        for count, ujam in enumerate(self.ujams):
-            if ujam.update(windowHeight, self.check_all):
-                fallen.append(count)
-        
-        for number in fallen:
-            pass
+        for ujam in reversed(self.ujams):
+            if not ujam.update(windowHeight, self.check_all):
+                self.ujams.remove(ujam)
         
         self.lavaAnim.flip()
     
