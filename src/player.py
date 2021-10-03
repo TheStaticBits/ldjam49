@@ -11,7 +11,7 @@ class Player:
         self.vel = 0
         self.canJump = True
     
-    def update(self, inputs, windowHeight, check_all):
+    def update(self, inputs, windowSize, check_all):
         directions = []
 
         # Left and right
@@ -29,7 +29,9 @@ class Player:
                     self.rect.left = result.right
                 elif "right" in directions:
                     self.rect.right = result.left
-
+        
+        self.rect.clamp_ip((0, 0, windowSize[0], windowSize[1]))
+        
         # Gravity
         self.vel += 0.5
         
@@ -55,7 +57,7 @@ class Player:
             self.canJump = False
 
         # Testing if the player fell off the screen
-        if self.rect.y > windowHeight:
+        if self.rect.y > windowSize[1]:
             return False
         
         return True

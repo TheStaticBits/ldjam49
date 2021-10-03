@@ -33,7 +33,7 @@ class Objects:
         for platform in self.platforms:
             platform.update()
         
-        if randint(1, 20) == 10:
+        if randint(1, 10) == 10:
             platform = choice(self.platforms)
             if not platform.collapsing and not platform.collapsed:
                 platform.start_collapse()
