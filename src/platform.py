@@ -1,12 +1,21 @@
 import pygame
 from math import floor
 
+pygame.display.init()
+
 class Platform:
     blinkDelay = 12
     collapsesAt = blinkDelay * 4
     comingBackDelay = 120
 
     def __init__(self, pos, size):
+        # Image
+        self.img = pygame.image.load("res/platform.png").convert_alpha()
+        
+        # Blink overlay
+        self.blinkOverlay = pygame.Surface((self.img.get_width(), self.img.get_height()), pygame.SRCALPHA) 
+        self.blinkOverlay.fill((100, 100, 100, 125))
+
         self.rect = pygame.Rect(pos[0], pos[1], size[0], size[1])
         
         self.collapsed = False
@@ -42,11 +51,9 @@ class Platform:
                 self.collapsed = False
 
     def render(self, window):
-        color = (255, 255, 255)
+        if not self.collapsed:
+            window.blit(self.img, (self.rect.x, self.rect.y))
         
         if self.collapsing:
             if floor(self.collapsingStage / self.blinkDelay) % 2 == 0:
-                color = (180, 180, 180)
-
-        if not self.collapsed:
-            pygame.draw.rect(window, color, self.rect)
+                window.blit(self.blinkOverlay, (self.rect.x, self.rect.y))

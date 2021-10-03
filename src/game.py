@@ -24,8 +24,12 @@ class Game:
         for y in range(int(self.window.winSize[1] / 50)):
             for x in range(int(self.window.winSize[0] / 50)):
                 self.bricks.blit(brick, (x * 50, y * 50))
+        
+        self.score = 0
     
     def update(self):
+        self.score += 1
+
         self.input.update()
         
         if self.scene == "play":

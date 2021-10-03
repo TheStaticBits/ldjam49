@@ -6,15 +6,14 @@ from src.animation import Animation
 
 class Objects:
     platformLevels = [80, 130, 180, 230]
-    platformsPerLevel = 5
 
     def __init__(self, windowSize):
         self.platforms = []
         
         # Platforms
         for level in self.platformLevels:
-            for count in range(self.platformsPerLevel):
-                self.platforms.append(Platform((count * (windowSize[0] / self.platformsPerLevel), level), (windowSize[0] / self.platformsPerLevel, 10)))
+            for count in range(5):
+                self.platforms.append(Platform((count * (windowSize[0] / 5), level), (windowSize[0] / 5, 10)))
         
         # Lava animation
         self.lavaAnim = Animation("res/lava.png", 25, 40)

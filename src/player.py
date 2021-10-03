@@ -6,7 +6,8 @@ class Player:
     jumpPower = -5
 
     def __init__(self, winSize):
-        self.rect = pygame.Rect((winSize[0] / 2) - 10, 50, 10, 10)
+        self.img = pygame.image.load("res/player.png").convert_alpha()
+        self.rect = pygame.Rect((winSize[0] / 2) - self.img.get_width(), 50, self.img.get_width(), self.img.get_height())
         
         self.vel = 0
         self.canJump = True
@@ -30,6 +31,7 @@ class Player:
                 elif "right" in directions:
                     self.rect.right = result.left
         
+        # Clamps player between bricks
         self.rect.clamp_ip((0, 0, windowSize[0], windowSize[1]))
         
         # Gravity
@@ -63,4 +65,4 @@ class Player:
         return True
     
     def render(self, window):
-        pygame.draw.rect(window, (255, 0, 0), self.rect)
+        window.blit(self.img, (self.rect.x, self.rect.y))

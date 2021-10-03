@@ -13,7 +13,7 @@ class Window:
         self.clock = pygame.time.Clock()
 
     def update(self):
-        self.window.blit(pygame.transform.scale(self.screen, (self.size[0] * 2, self.size[1] * 2)), (50, 50))
+        self.window.blit(pygame.transform.scale(self.screen, (self.size[0] * 2, self.size[1] * 2)), (50, 75))
         
         pygame.display.flip()
         self.clock.tick(60)
