@@ -40,7 +40,7 @@ class Game:
             result = self.player.update(self.input.keys, self.window.size, self.objects.check_all)
             if not result:
                 self.scene = "menu"
-                
+
                 self.player.reset(self.window.size)
                 self.objects.reset()
                 self.score = 0
@@ -51,12 +51,14 @@ class Game:
             result = self.menu.update(self.input.mousePos, self.input.mouseDown)
             if result == "play":
                 self.scene = result
+                self.objects.changeDifficulty(self.menu.difficulty)
     
     def render(self):
         self.window.window.blit(self.bricks, (0, 0))
         
         if self.scene == "play":
-            self.window.window.blit(self.font.render("SCORE: " + str(int(self.score / 60)), False, (255, 255, 255)), (50, 10))
+            # Every second gives you 10 points
+            self.window.window.blit(self.font.render("SCORE: " + str(int(self.score / 6)), False, (255, 255, 255)), (50, 10))
 
             self.objects.render_background(self.window.screen)
             self.player.render(self.window.screen)

@@ -24,10 +24,16 @@ class Objects:
         for y in range(int(windowSize[1] / 25)):
             for x in range(int(windowSize[0] / 25)):
                 self.background.blit(img, (x * 25, y * 25))
+        
+        # Difficulty
+        self.difficulty = 0
     
     def reset(self):
         for platform in self.platforms:
             platform.reset()
+    
+    def changeDifficulty(self, difficulty):
+        self.difficulty = 125 - (difficulty * 20)
     
     def check_all(self, rect):
         for platform in self.platforms:
@@ -39,8 +45,8 @@ class Objects:
     def update(self):
         for platform in self.platforms:
             platform.update()
-        
-        if randint(1, 10) == 10:
+
+        if randint(1, self.difficulty) == 2:
             platform = choice(self.platforms)
             if not platform.collapsing and not platform.collapsed:
                 platform.start_collapse()
