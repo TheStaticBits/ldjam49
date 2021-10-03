@@ -61,7 +61,7 @@ class Player:
         else:
             self.canJump = False
 
-        # Testing if the player fell off the screen
+        # Testing if the player fell into the lava
         if self.rect.y > windowSize[1]:
             return False
         

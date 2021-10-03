@@ -34,12 +34,8 @@ class Menu:
             self.arrow.get_width(),
             self.arrow.get_height()
         )
-        self.arrow2 = pygame.Rect(
-            self.difficultyPos[0] + 95,
-            self.difficultyPos[1] + 55,
-            self.arrow.get_width(),
-            self.arrow.get_height()
-        )
+        self.arrow2 = self.arrow1.copy()
+        self.arrow2.x = self.difficultyPos[0] + 95
         
         self.previousScore = "---"
         self.bestScore = "---"
@@ -47,7 +43,6 @@ class Menu:
     
     def updateScore(self, score):
         self.previousScore = score
-        print(self.previousScore)
     
     def update(self, mousePos, mouseDown):
         if mouseDown:

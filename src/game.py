@@ -42,11 +42,11 @@ class Game:
                 self.scene = "menu"
 
                 self.player.reset(self.window.size)
-                self.objects.reset()
+                self.objects.reset(self.window.size[0])
                 self.menu.updateScore(int(self.score / 6))
                 self.score = 0
             
-            self.objects.update()
+            self.objects.update(self.window.size[1])
         
         elif self.scene == "menu":
             result = self.menu.update(self.input.mousePos, self.input.mouseDown)
@@ -62,8 +62,11 @@ class Game:
             self.window.window.blit(self.font.render("SCORE: " + str(int(self.score / 6)), False, (255, 255, 255)), (50, 10))
 
             self.objects.render_background(self.window.screen)
+            
             self.player.render(self.window.screen)
+
             self.objects.render_platforms(self.window.screen)
+            self.objects.render_ujams(self.window.screen)
             self.objects.render_lava(self.window.screen)
         
         elif self.scene == "menu":

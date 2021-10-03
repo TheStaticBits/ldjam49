@@ -3,17 +3,24 @@ from random import choice, randint
 
 from src.platform import Platform
 from src.animation import Animation
+from src.unmovable_jam import UJam
 
 class Objects:
     platformLevels = [80, 130, 180, 230]
+    ujamAmountPerLayer = 7
 
     def __init__(self, windowSize):
-        self.platforms = []
-        
         # Platforms
+        self.platforms = []        
         for level in self.platformLevels:
             for count in range(5):
-                self.platforms.append(Platform((count * (windowSize[0] / 5), level), (windowSize[0] / 5, 10)))
+                self.platforms.append(
+                    Platform(
+                        (count * (windowSize[0] / 5), level), (windowSize[0] / 5, 10)
+                    )
+                )
+        
+        self.createUJams(windowSize[0])
         
         # Lava animation
         self.lavaAnim = Animation("res/lava.png", 25, 40)
@@ -27,10 +34,19 @@ class Objects:
         
         # Difficulty
         self.difficulty = 0
+
+    def createUJams(self, windowWidth):
+        # Unmovable Jams (for decoration)
+        self.ujams = []
+        for level in self.platformLevels:
+            for i in range(self.ujamAmountPerLayer):
+                self.ujams.append(UJam((randint(5, windowWidth - 15), level)))
     
-    def reset(self):
+    def reset(self, windowWidth):
         for platform in self.platforms:
             platform.reset()
+        
+        self.createUJams(windowWidth)
     
     def changeDifficulty(self, difficulty):
         self.difficulty = 95 - (difficulty * 15)
@@ -42,7 +58,7 @@ class Objects:
         
         return False
 
-    def update(self):
+    def update(self, windowHeight):
         for platform in self.platforms:
             platform.update()
 
@@ -50,6 +66,14 @@ class Objects:
             platform = choice(self.platforms)
             if not platform.collapsing and not platform.collapsed:
                 platform.start_collapse()
+        
+        fallen = []
+        for count, ujam in enumerate(self.ujams):
+            if ujam.update(windowHeight, self.check_all):
+                fallen.append(count)
+        
+        for number in fallen:
+            pass
         
         self.lavaAnim.flip()
     
@@ -60,6 +84,10 @@ class Objects:
         # Platforms
         for platform in self.platforms:
             platform.render(window)
+    
+    def render_ujams(self, window):
+        for ujam in self.ujams:
+            ujam.render(window)
     
     def render_lava(self, window):
         # Lava
