@@ -12,6 +12,8 @@ class Player:
         self.vel = 0
         self.canJump = True
 
+        self.deathSound = pygame.mixer.Sound("res/death.wav")
+
     def reset(self, winSize):
         self.rect = pygame.Rect((winSize[0] / 2) - self.img.get_width(), 50, self.img.get_width(), self.img.get_height())
     
@@ -63,6 +65,7 @@ class Player:
 
         # Testing if the player fell into the lava
         if self.rect.y > windowSize[1]:
+            self.deathSound.play()
             return False
         
         return True

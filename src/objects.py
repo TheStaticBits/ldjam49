@@ -49,7 +49,7 @@ class Objects:
         self.createUJams(windowWidth)
     
     def changeDifficulty(self, difficulty):
-        self.difficulty = 95 - (difficulty * 15)
+        self.difficulty = 65 - (difficulty * 10)
     
     def check_all(self, rect):
         for platform in self.platforms:

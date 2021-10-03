@@ -78,3 +78,5 @@ class Game:
             self.render()
 
             self.window.update(self.scene == "play")
+        
+        pygame.quit()

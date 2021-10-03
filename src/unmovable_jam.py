@@ -2,7 +2,11 @@ import pygame
 from random import randint
 from math import ceil
 
+pygame.mixer.init()
+
 class UJam:
+    deathSound = pygame.mixer.Sound("res/ujamdeath.wav")
+
     def __init__(self, pos):
         self.img = pygame.image.load("res/other_jams/jam_" + str(randint(0, 6)) + ".png").convert_alpha()
 
@@ -22,6 +26,7 @@ class UJam:
         
         # Testing if the jam fell into the lava
         if self.rect.y > windowHeight:
+            self.deathSound.play()
             return False
 
         return True
