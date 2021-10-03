@@ -9,10 +9,10 @@ class Menu:
             windowSize[1] - self.logo.get_height()
         )
 
-        self.playButtonText = pygame.font.Font("font/monogram.ttf", 80).render("PLAY", False, (255, 255, 255))
+        self.playButtonText = pygame.font.Font("font/monogram.ttf", 150).render("PLAY", False, (255, 255, 255))
         self.playButtonRect = pygame.Rect(
             (windowSize[0] / 2) - (self.playButtonText.get_width() / 2),
-            100,
+            70,
             self.playButtonText.get_width(), self.playButtonText.get_height()
         )
 
@@ -40,6 +40,14 @@ class Menu:
             self.arrow.get_width(),
             self.arrow.get_height()
         )
+        
+        self.previousScore = "---"
+        self.bestScore = "---"
+        self.prevBestScrFont = pygame.font.Font("font/monogram.ttf", 50) # For both the previous score and the best score
+    
+    def updateScore(self, score):
+        self.previousScore = score
+        print(self.previousScore)
     
     def update(self, mousePos, mouseDown):
         if mouseDown:
@@ -53,10 +61,15 @@ class Menu:
                 self.difficulty += 1
             
             if self.difficulty < 1:
-                self.difficulty = 1
+                self.difficulty = 6
 
             elif self.difficulty > 6:
-                self.difficulty = 6
+                self.difficulty = 1
+
+    def calcCenter(self, window, font, text):
+        render = font.render(text, False, (255, 255, 255))
+        renderX = window.get_width() / 2 - render.get_width() / 2
+        return render, renderX
 
     def render(self, window):
         # Logo
@@ -69,14 +82,18 @@ class Menu:
         window.blit(self.difficultyText, self.difficultyPos)
 
         # Difficulty number
-        render = self.difficultyFont.render(str(self.difficulty), False, (255, 255, 255))
-        renderPos = (
-            (window.get_width() / 2) - (render.get_width() / 2),
-            self.difficultyPos[1] + 25
-        )
-        window.blit(render, renderPos)
+        render, renderX = self.calcCenter(window, self.difficultyFont, str(self.difficulty))
+        window.blit(render, (renderX, self.difficultyPos[1] + 25))
         
         # Left arrow
         window.blit(self.arrow, (self.arrow1.x, self.arrow1.y))
         # Right arrow
         window.blit(pygame.transform.flip(self.arrow, True, False), (self.arrow2.x, self.arrow2.y))
+
+        # Previus score
+        render, renderX = self.calcCenter(window, self.prevBestScrFont, str("Previous Score: " + str(self.previousScore)))
+        window.blit(render, (renderX, self.difficultyPos[1] + 120))
+
+        # Best score
+        render, renderX = self.calcCenter(window, self.prevBestScrFont, str("Best Diff. " + str(self.difficulty) + " Score: " + str(self.bestScore)))
+        window.blit(render, (renderX, self.difficultyPos[1] + 180))

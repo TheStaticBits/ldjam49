@@ -33,7 +33,7 @@ class Objects:
             platform.reset()
     
     def changeDifficulty(self, difficulty):
-        self.difficulty = 125 - (difficulty * 20)
+        self.difficulty = 95 - (difficulty * 15)
     
     def check_all(self, rect):
         for platform in self.platforms:

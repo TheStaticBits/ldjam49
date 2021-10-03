@@ -32,17 +32,18 @@ class Game:
         self.font = pygame.font.Font("font/monogram.ttf", 60)
     
     def update(self):
-        self.score += 1
-
         self.input.update()
         
         if self.scene == "play":
+            self.score += 1
+
             result = self.player.update(self.input.keys, self.window.size, self.objects.check_all)
             if not result:
                 self.scene = "menu"
 
                 self.player.reset(self.window.size)
                 self.objects.reset()
+                self.menu.updateScore(int(self.score / 6))
                 self.score = 0
             
             self.objects.update()
