@@ -21,13 +21,16 @@ Every second is worth 10 points. The highest scores of each difficulty are autom
 - IDE: VSCode
 - Sound effects: SFXR
 
-## Difficulties
+## Difficulty Levels
 - 1: Nobody Mode - You can literally afk between two platforms and get like 8 minutes
 - 2: Beginner Mode - The difficulty is ramping up! But not by much currently
 - 3: Intermediate Mode - This is the default difficulty, it provides a normal level of difficulty
 - 4: Hard Mode - Slightly harder than Intermediate Mode
 - 5: Harder Mode - This is where the difficulty really goes up! This one is challenging to get a score of 1000 on. You'll have to learn how to jump over gaps in the platforms!
 - 6: Impossible Mode - Uhhh, this one is just, well, read the name
+
+# BUG FIXES MADE AFTER RELEASE
+- High scores (Best) not properly calculating. If you got a score that was lower than the actual best score, it would still overwrite your previous high score.
 
 # TO PLAY
 - Click on the current release on the right
