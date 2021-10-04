@@ -29,7 +29,7 @@ Every second is worth 10 points. The highest scores of each difficulty are autom
 - 5: Harder Mode - This is where the difficulty really goes up! This one is challenging to get a score of 1000 on. You'll have to learn how to jump over gaps in the platforms!
 - 6: Impossible Mode - Uhhh, this one is just, well, read the name
 
-# BUG FIXES MADE AFTER RELEASE
+### BUG FIXES MADE AFTER RELEASE
 - High scores (Best) not properly calculating. If you got a score that was lower than the actual best score, it would still overwrite your previous high score.
 
 # TO PLAY
