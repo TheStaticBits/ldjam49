@@ -46,7 +46,7 @@ class Menu:
         self.previousScore = score
 
         currentScore = get_highscores()[self.difficulty - 1]
-        if isinstance(currentScore, str) or score > currentScore:
+        if currentScore == "---" or score > int(currentScore):
             modify_highscore(self.difficulty, score)
             self.bestScore = get_highscores()[self.difficulty - 1]
     
