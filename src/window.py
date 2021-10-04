@@ -10,6 +10,8 @@ class Window:
         # Size of entire window
         self.winSize = size
 
+        icon = pygame.image.load("res/icon.png")
+        pygame.display.set_icon(icon)
         pygame.display.set_caption("Ludum Dare 49")
 
         self.clock = pygame.time.Clock()
